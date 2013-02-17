@@ -16,7 +16,7 @@ The code structure is very ugly, not nicely done. Hope you don't mind it's just 
   * articles can be edited or deleted.
   * an extremly simple back-end area to manage with articles.
 * Comments
-  * anonymous comment allowed.
+  * anonymous comment is allowed.
   * support Google account.
   * comments can be deleted.
 * Support RSS

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+	<head>
+		<title>admin page</title>
+		<script type="text/javascript">
+			function generate_form(id, method, url){
+				input = document.createElement("input");
+				input.type = "hidden";
+				input.name = 'id';
+				input.value = id;
+
+				form = document.createElement("form");
+				form.appendChild(input);
+				form.method = method;
+				form.action = url;
+				
+				document.body.appendChild(form);
+				
+				form.submit();
+			}
+
+			function delete_article(id){
+				generate_form(id, "post", "{{ defines.URLS.article_delete }}")
+			}
+
+			function edit_article(id){
+				generate_form(id, "get", "{{ defines.URLS.article_edit }}")
+			}
+
+		</script>
+	</head>
+	<body>
+		<p>hello admin</p>
+		
+		<a href="/admin/article/edit/">new article, perhaps?</a>
+
+		{% if articles %}
+			<table border="1">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>title</td>
+						<td>content</td>
+						<td>published time</td>
+						<td>last modified time</td>
+						<td>is draft</td>
+					</tr>
+				</thead>
+				{% for article in articles %}
+					<tr>
+						<td>{{ article.id }}</td>
+						<td>{{ article.title }}</td>
+						<td>{{ article.content|escape }}</td>
+						<td>{{ article.published_time|date:"D, d M Y, H:i" }}</td>
+						<td>{{ article.last_modified_time|date:"D, d M Y, H:i" }}</td>
+						<td>{{ article.is_draft }}</td>
+						<td><a href="/admin/article/edit/{{ article.id }}">edit</a></td>
+						<td><a href="/admin/article/delete/{{ article.id }}">delete</a></td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<p>there is no any articles now</p>
+		{% endif %}
+
+		<a href="{{ defines.URLS.main }}">back to blog</a>
+	</body>
+</html>

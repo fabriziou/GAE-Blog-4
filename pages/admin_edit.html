@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+	<head>
+		<title>admin edit</title>
+
+		<script type="text/javascript">
+			function save(){
+				document.getElementById("edit_form").submit();
+			}
+
+			function save_as_draft(){
+				document.getElementById("draft").value = "True";
+				save();
+			}
+			
+			function preview(){
+				document.getElementById("draft").value = "True";
+				form = document.getElementById("edit_form");
+				form.action = "/admin/article/preview";
+				form.submit();
+			}
+		</script>
+	</head>
+	<body>
+		<p>hello~~~~</p>
+		<form action="/admin/article/save" method="post" id="edit_form">
+			<label>title</label>
+			{% block input_title %}
+			{% endblock %}
+			<input type="hidden" id="draft" name="is_draft" value="False" />
+			<input type="hidden" name="article_id" value="{{ article.id }}" />
+			<div>
+				{% block input_content %}
+				{% endblock %}
+			</div>
+			<div>
+				<input type="button" value="publish" onclick="save()" />
+				<input type="button" value="save as draft" onclick="save_as_draft()" />
+			</div>
+		</form>
+	
+		
+		<button onclick="preview()">preview</button>
+		
+		<div>
+			{% if article.id %}
+				<iframe src="/article/{{ article.id }}" width="600" height="600" scrolling="auto" frameborder="1"></iframe>
+			{% else %}
+				<iframe src="/" width="600" height="600" scrolling="auto" frameborder="1"></iframe>
+			{% endif %}
+		</div>
+		
+		<div>
+			<a href="{{ defines.URLS.admin }}">back to admin page</a>
+		</div>
+	</body>
+</html>

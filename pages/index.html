@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+	<head>
+		<title>Code For Food</title>
+		<link rel="stylesheet" type="text/css" href="/static/base.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="/static/index.css" media="screen">
+		<script language="javascript" src="/static/jquery-1.6.2.min.js"></script>
+		<script language="javascript" src="/static/scroll-nav.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			{% include "base.html" %}
+
+			<div class="posts-container">
+				<div class="inner-posts-container">
+					{% if articles %}
+						{% for a in articles %}
+							{% if not a.is_draft %}
+								<div class="single-post-container">
+									<div class="date-flag-container">
+										{{ a.published_time|date:"Y"}}<br/>
+										{{ a.published_time|date:"m"}}<br/>
+										{{ a.published_time|date:"d"}}
+									</div>
+									<div class="post-wrapper">
+										<div class="post-container">
+											<div class="article-header">
+												<a href="/article/{{ a.id }}">{{ a.title }}</a>
+											</div>
+											<div class="article-content">{{ a.content }}</div>
+										</div>
+										<div class="article-footer">
+											<div class="article-footer-pubtime">published when {{ a.published_time|date:"H:i"}}</div>
+											{% if users.is_current_user_admin %}
+												<div class="article-footer-edit">
+													<a href="/admin/article/edit/{{ a.id }}">edit</a>
+												</div>
+											{% endif %}
+											<div class="article-footer-comments">
+												<a href="/article/{{ a.id }}#comment">{{ a.comment_counter }} comments</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endif %}
+						{% endfor %}
+					{% else %}
+						<p class="info">Oops! There is no any articles yet.</p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="push"></div>
+		</div>
+		
+		<div class="footer">
+			Design by + <a href="http://about.me/andrew_yen">zushen</a>
+		</div>
+	</body>
+</html>

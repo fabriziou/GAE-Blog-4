@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+	<head>
+		<title>you shall not pass!</title>
+		<link rel="stylesheet" type="text/css" href="/static/not_admin.css" media="screen">
+		<script language="javascript" src="/static/jquery-1.6.2.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var number = 3;
+				
+				$("#counter").html(number);
+				
+				var inter = setInterval(function(){
+					number -= 1;
+					$("#counter").html(number);
+					if(number <= 0){
+						clearInterval(inter);
+					}
+				}, 1000);
+				
+				setTimeout(function(){
+					window.location = "/";
+				}, number * 1000)
+			});
+		</script>
+	</head>
+	<body>
+		<div class="push"></div>
+		<div id="main">
+			<div class="header">
+				sorry, only administrator allowed.
+				<div id="info">
+					redirect in
+					<p id="counter"></p>
+					<a href="/">or just press me</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

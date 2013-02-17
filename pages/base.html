@@ -1,0 +1,36 @@
+<div id="nav">
+	<div class="nav-left">
+		<ul class="nav-wrapper">
+			<li><a href="/">posts</a></li>
+			<li><a href="/rss">rss</a></li>
+		</ul>
+	</div>
+
+	<div class="nav-middle">
+		<p>
+			{% if users.get_current_user %}
+				Hello {{ users.get_current_user.nickname }}
+			{% else %}
+				Hello anonymous
+			{% endif %}
+		</p>
+	</div>
+
+	<div class="nav-right">
+		<ul class="nav-wrapper">
+			<li><a href="{{ defines.get_login_url }}">{% if users.get_current_user %}logout{% else %}login{% endif %}</a></li>
+			<li id="menu">
+				<a href="/admin">admin</a>
+				<div class="rounded-bottom-corners" id="menu-items">
+					<a href="/admin/article/edit/" class="rounded-bottom-corners">new post</a><
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="header">
+	<div class="header-inner">
+		<a href="/">{{ defines.BLOG.blog_name }}</a>					
+	</div>
+</div>

@@ -1,0 +1,17 @@
+{% extends "admin_edit.html" %}
+
+{% block input_title %}
+	{% if article %}
+		<input type="text" id="title" name="title" size="20" value="{{ article.title }}" />
+	{% else %}
+		<input type="text" id="title" name="title" size="20" />
+	{% endif %}
+{% endblock %}
+
+{% block input_content %}
+	{% if article %}
+		<textarea id="content" name="content" cols="60" rows="30">{{ article.content }}</textarea>
+	{% else %}
+		<textarea id="content" name="content" cols="60" rows="30"></textarea>
+	{% endif %}
+{% endblock %}

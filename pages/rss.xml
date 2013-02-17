@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>{{ defines.BLOG.blog_name }}</title>
+		<link>{{ url }}</link>
+		<description>{{ defines.BLOG.blog_desc }}</description>
+		<pubDate>{{ last_update }}</pubDate>
+		{% for a in articles %}
+			<item>
+				<title>{{ a.title }}</title>
+				<link>{{ url }}/article/{{ a.id }}</link>
+				<guid>{{ url }}/article/{{ a.id }}</guid>
+				<pubDate>{{ a.published_time|date:"D, d M Y, H:i" }}</pubDate>
+				<description>{{ a.content }}</description>
+				<author>{{ defines.BLOG.blog_author }}</author>
+			</item>
+		{% endfor %}
+	</channel>
+</rss>

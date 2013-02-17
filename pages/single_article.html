@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+	<head>
+		<title>Code For Food</title>
+		<link rel="stylesheet" type="text/css" href="/static/base.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="/static/single_article.css" media="screen">
+		<script language="javascript" src="/static/jquery-1.6.2.min.js"></script>
+		<script language="javascript" src="/static/scroll-nav.js"></script>
+		<script type="text/javascript">
+			function submit(){
+				input_id = document.createElement("input");
+				input_id.type = "hidden";
+				input_id.name = "article_id";
+				input_id.value = {{ article.id }};
+				
+				input_content = document.createElement("input");
+				input_content.type = "hidden";
+				input_content.name = "content";
+				input_content.value = document.getElementById("content").value;
+				
+				form = document.createElement("form");
+				form.action = "/comment/submit";
+				form.method = "post";
+				form.appendChild(input_id);
+				form.appendChild(input_content);
+				
+				document.body.appendChild(form);
+				
+				if(input_content.value.trim() != ""){
+					form.submit();
+				}
+				else{
+					alert("content can not be empty!");
+				}
+				
+			}
+			
+			function delete_comment(){
+				var result = confirm("really delete?");
+				if(result){
+					return true;
+				}
+				return false;
+			}
+		</script>
+	</head>
+	<body>
+		<div class="wrapper">
+			{% include "base.html" %}
+			
+			<div class="post-container">
+				<div class="inner-post-container">
+					{% if article.is_draft and not users.is_current_user_admin %}
+						<p class="info">oops! This article is under constructure. Coming sooooooooon~</p>
+					{% else %}
+						<div class="article-title">{{ article.title }}</div>
+						<div class="article-pubdate">{{ article.published_time|date:"Y/m/d H:i" }}</div>
+						<div class="article-content">{{ article.content }}</div>
+						<div class="comments-container" id="comment">
+							{% if comments %}
+								{% for c in comments %}
+									<div class="single-comment-container">
+										<div class="comment-who">{% if c.author %}{{ c.author }}:{% else %}An anonymous:{% endif %}</div>
+										<div class="comment-content">{{ c.content|escape }}</div>
+										<div class="comment-when">{{ c.comment_time|date:"Y/m/d H:i" }}</div>
+										{% if users.is_current_user_admin %}
+											<div class="comment-delete">
+												<a href="/comment/delete/{{ article.id }}/{{ c.id }}" onclick="return delete_comment();">delete</a>
+											</div>
+										{% endif %}
+									</div>
+								{% endfor %}
+							{% else %}
+								<p class="info">No comments yet. leave one, perhaps?</p>
+							{% endif %}
+							<hr class="comment-seperator">
+							<div class="submit-comment-container">
+								<div class="submit-comment-who">leave a comment</div>
+								<div class="submit-comment-content">
+									<textarea id="content"></textarea>
+								</div>
+								<div class="submit-comment-footer">
+									<button onclick="submit()">submit</button>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="push"></div>
+		</div>
+		
+		<div class="footer">
+			Design by + <a href="#">zushen</a>
+		</div>
+	</body>
+</html>

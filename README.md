@@ -8,7 +8,7 @@ I built this blog with [this manual](http://brizzled.clapper.org/blog/2008/08/07
 
 The code structure is very ugly, not nicely done. Hope you don't mind it's just an practice.
 
-# Feature
+## Feature
 * Articles
   * edit with HTML.
   * you can preview a working article.

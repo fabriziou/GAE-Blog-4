@@ -20,3 +20,9 @@ The code structure is very ugly, not nicely done. Hope you don't mind it's just 
   * support Google account.
   * comments can be deleted.
 * Support RSS
+
+## Version
+* v1.1 (2013/2/17)
+ * comments can not be empty anymore.
+* v1.0 (2011/8)
+ * initial version

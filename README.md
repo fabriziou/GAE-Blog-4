@@ -8,6 +8,13 @@ I built this blog with [this manual](http://brizzled.clapper.org/blog/2008/08/07
 
 The code structure is very ugly, not nicely done. Hope you don't mind it's just an practice.
 
+## Tools & Libs
+* Python
+  * Django
+* HTML/CSS/JaveScript
+  * JQuery
+* Google App Engine
+
 ## Feature
 * Articles
   * edit with HTML.

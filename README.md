@@ -1,7 +1,7 @@
 GAE-Blog
 ========
 
-[My tiny GAE blog](http://zushenyan.appspot.com/)
+[My tiny GAE blog](http://zushenyan-1054.appspot.com/)
 
 A practice with Python and Google App Engine.
 I built this blog with [this manual](http://brizzled.clapper.org/blog/2008/08/07/writing-blogging-software-for-google-app-engine/). It's really worth a read.
